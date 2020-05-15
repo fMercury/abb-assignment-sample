@@ -2,6 +2,7 @@
 const { createServer } = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
+const cors = require('cors');
 
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
@@ -11,6 +12,9 @@ const { SubscriptionServer } = require('subscriptions-transport-ws');
 const { PubSub } = require('graphql-subscriptions');
 
 const pubsub = new PubSub();
+
+//String const for publish event
+const NEW_PART = "NEW_PART";
 
 //list to record new piece
 const partProducedList = []
@@ -52,7 +56,9 @@ const typeDefs = `
   type Mutation {
     pushPart(newPart: PartInfo!): Part
   }
-
+  type Subscription { 
+    newPartNotification: Part
+  }
   
 `;
 
@@ -84,7 +90,18 @@ const resolvers = {
             //record piece/part
             partProducedList.push(new_part_produced);
             lastPartProduced = new_part_produced;
+
+            //notificate that new event NEW_PART happened and send the new object
+            pubsub.publish(NEW_PART, { newPartNotification: new_part_produced });
+
             return new_part_produced;
+        },
+    },
+    //resolver for subscription
+    Subscription: {
+        //send an object with callback function to emit the event
+        newPartNotification: {
+            subscribe: () => pubsub.asyncIterator(NEW_PART)
         },
     },
 };
@@ -95,6 +112,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 const app = express();
 
 // middlewares
+app.use('*', cors({ origin: `http://localhost:3000` }));
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql',

@@ -1,0 +1,19 @@
+{
+  "name": "abb_assignment_sample",
+  "version": "1.0.0",
+  "description": "assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fMercury/ABB_assignment_sample.git"
+  },
+  "author": "Franco Daniel Berdun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fMercury/ABB_assignment_sample/issues"
+  },
+  "homepage": "https://github.com/fMercury/ABB_assignment_sample#readme"
+}
