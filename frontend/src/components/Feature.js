@@ -1,7 +1,8 @@
 import React from 'react'
-import './Part.css';
+import Control from './Control';
+import './Feature.css';
 
-const Part = ({ feature }) => {
+const Feature = ({ feature }) => {
 
     // color array is to simulate operation related with the decision of the color on head table
     const color = ["titletableY", "titletableR", "titletableG"]
@@ -22,11 +23,13 @@ const Part = ({ feature }) => {
                     <th>Dev Out Tol</th>
                     <th></th>
                 </tr>
-
+                {feature.controls.map( (control, index) => 
+                    <Control key={index} control={control} />
+                    ) }                
             </tbody>
         </table>
     )
 
 };
 
-export default Part
+export default Feature
