@@ -1,17 +1,18 @@
 # ABB_assignment_sample
 
-In the backend folder is the Apollo server code and a robot's script that simulates the periodic entry of new data. the information is always the same. The data is from a new piece/part with 3 features and each with a different number of controls.
+In the backend folder is the Apollo server code and a robot's script that simulates the periodic entry of new data. The information is always the same. The data is from a new piece/part with 3 features and each with a different number of controls.
 
-In the frontend folder there is a react application. the deviation control numbers that the robot sends are static and according to the value a different emoticon is rendered. The head color of each frame change with each new entry of data from the subscription. random numbers are generated in frontend and component style values are changed.
-
-Next, the scripts to start the general project locally, or each separately.
+In the frontend folder there is a react application. The deviation control numbers that the robot sends are static and according to the value a different emoticon is rendered. The head color of each frame change with each new entry of data from the subscription. Random numbers are generated in frontend and component style values are changed.
 
 TODO: 
  - test each server endpoint.
- - test that component is properly rendered
- - refactor the Backend separate the typedef and resolver from the index to different files
- - with test its possible to make a CI
+ - test that each component is properly rendered
+ - refactor Backend, separate the typedef and resolver to separated files
+ - with test its possible to make a CI setup
  - 
+
+Next, the scripts to start the general project locally, or each separately.
+
 
 ## Start All 
 In main folder execute
