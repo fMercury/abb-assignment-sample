@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import Part from './components/Part';
 
 class App extends Component {
 
@@ -29,7 +30,7 @@ class App extends Component {
 
             this.state.partFeatures.map((feature, index) => (
               <div className="card col-md-13 shadow-md ">
-
+                <Part feature={feature} key={index} />
               </div>
             ))
           ) : <h1>Loading..</h1>}
