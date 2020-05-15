@@ -14,10 +14,33 @@ const pubsub = new PubSub();
 
 // types definition
 const typeDefs = ` 
+
+  type Control {
+    name: String!
+    dev: Int!
+    devOutTotal: Int!
+    expected: Int!
+  }
+  type Feature {
+    name: String!
+    controls: [Control!]!
+  }
+  type Part {
+    name: String!
+    features: [Feature!]!
+  }
+  type Query {
+    partNotification: Part
+  } 
+  
 `;
 
 // resolvers definition
 const resolvers = {
+    //resolver for query
+    Query: {
+        partNotification: () => console.log("..."),
+    },
 };
 
 // schema definition
