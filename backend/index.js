@@ -14,7 +14,6 @@ const pubsub = new PubSub();
 
 // types definition
 const typeDefs = ` 
-
 `;
 
 // resolvers definition
