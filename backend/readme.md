@@ -1,14 +1,6 @@
-steps
+## Start backend
 ```
-npm install
-```
-
-```
-npm start 
-```
-
-or 
-
-```
-nodemon
+$ cd backend
+$ npm install
+$ nodemon & node robot.js
 ```
