@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    partName: null,
+    partFeatures: null
+  }
+
+  componentWillReceiveProps({ data: { newPartNotification: { name, features } } }) {
+    this.setState({ partName: name })
+    this.setState({ partFeatures: features })
+  };
+
+  render() {
+    return (
+
+      <div className="container">
+        <div className="row">
+          <div className="col-md-13 shadow-md ">
+            <h4>{this.state.partName}</h4>
+          </div>
+        </div>
+
+        <div className="row">
+          {(this.state.partFeatures) ? (
+
+            this.state.partFeatures.map((feature, index) => (
+              <div className="card col-md-13 shadow-md ">
+
+              </div>
+            ))
+          ) : <h1>Loading..</h1>}
+        </div>
+      </div>
+    );
+  }
 }
 
-export default App;
+const subNewPartNotification = gql`
+subscription{
+  newPartNotification{
+    name
+    features{
+      name
+      controls{
+        name
+        dev
+        devOutTotal
+        expected
+      }
+    }
+  }
+}
+`;
+
+export default graphql(subNewPartNotification)(App);
