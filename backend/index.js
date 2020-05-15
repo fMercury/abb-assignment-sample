@@ -12,9 +12,26 @@ const { PubSub } = require('graphql-subscriptions');
 
 const pubsub = new PubSub();
 
+//list to record new piece
+const partProducedList = []
+let lastPartProduced = null
+
 // types definition
 const typeDefs = ` 
-
+  input ControlInfo {
+    name: String!
+    dev: Int!
+    devOutTotal: Int!
+    expected: Int!
+  }
+  input FeatureInfo {
+    name: String!
+    controls: [ControlInfo!]!
+  }
+  input PartInfo {
+    name: String!
+    features: [FeatureInfo!]!
+  }
   type Control {
     name: String!
     dev: Int!
@@ -30,8 +47,12 @@ const typeDefs = `
     features: [Feature!]!
   }
   type Query {
-    partNotification: Part
+    partQuery: Part
   } 
+  type Mutation {
+    pushPart(newPart: PartInfo!): Part
+  }
+
   
 `;
 
@@ -39,7 +60,32 @@ const typeDefs = `
 const resolvers = {
     //resolver for query
     Query: {
-        partNotification: () => console.log("..."),
+        partQuery: () => lastPartProduced,
+    },
+    //resolver for mutation 
+    Mutation: {
+        pushPart: (root, args) => {
+            const new_part_produced = {
+                name: args.newPart.name,
+                features: args.newPart.features.map(feature => {
+                    return {
+                        name: feature.name,
+                        controls: feature.controls.map(control => {
+                            return {
+                                name: control.name,
+                                dev: control.dev,
+                                devOutTotal: control.devOutTotal,
+                                expected: control.expected
+                            }
+                        })
+                    }
+                })
+            };
+            //record piece/part
+            partProducedList.push(new_part_produced);
+            lastPartProduced = new_part_produced;
+            return new_part_produced;
+        },
     },
 };
 
