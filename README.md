@@ -24,6 +24,7 @@ $ git clone https://github.com/fMercury/ABB_assignment_sample.git
 ```
 In main folder execute
 ```
+$ cd ABB_assignment_sample
 $ npm install
 ```
 and 
