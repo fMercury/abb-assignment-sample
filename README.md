@@ -17,6 +17,11 @@ TODO:
 Next, the scripts to start the general project locally, or each separately.
 
 ### Start All 
+
+Clone the project
+```
+$ git clone https://github.com/fMercury/ABB_assignment_sample.git
+```
 In main folder execute
 ```
 $ npm install
@@ -44,9 +49,9 @@ $ nodemon & node robot.js
 
 ### Start only frontend
 ```
-cd frontend
-npm install
-npm run start
+$ cd frontend
+$ npm install
+$ npm run start
 ```
 
 ## Operations 
