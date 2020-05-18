@@ -21,14 +21,11 @@ Next, the scripts to start the general project locally, or each separately.
 Clone the project
 ```
 $ git clone https://github.com/fMercury/ABB_assignment_sample.git
-```
-In main folder execute
-```
+
 $ cd ABB_assignment_sample
+
 $ npm install
-```
-and 
-```
+
 $ npm start
 ```
 
